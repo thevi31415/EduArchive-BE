@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EduArchive-BE", "EduArchive-BE\EduArchive-BE.csproj", "{725CE9EE-5649-4270-A268-CDA77AAF8988}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{725CE9EE-5649-4270-A268-CDA77AAF8988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{725CE9EE-5649-4270-A268-CDA77AAF8988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{725CE9EE-5649-4270-A268-CDA77AAF8988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{725CE9EE-5649-4270-A268-CDA77AAF8988}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F1D0BAE7-5973-4A67-9601-98A76D25B114}
+	EndGlobalSection
+EndGlobal
