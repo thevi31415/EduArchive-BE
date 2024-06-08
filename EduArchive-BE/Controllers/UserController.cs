@@ -1,4 +1,5 @@
-﻿using EduArchive_BE.Services;
+﻿using EduArchive_BE.Model;
+using EduArchive_BE.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,11 +19,13 @@ namespace EduArchive_BE.Controllers
         {
             try
             {
-                return Ok(_userRepository.GetAllUser());
+                return Ok(
+                    new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetAllUser() }
+                    );
             }
             catch
             {
-                return BadRequest();
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Lay User", Data = null }) ;
             }
 
 
