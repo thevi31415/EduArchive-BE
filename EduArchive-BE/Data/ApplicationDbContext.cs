@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EduArchive_BE.Data
 {
-    public class ApplicationDbContext: DbContext
+    public class ApplicationDbContext : DbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -12,5 +12,6 @@ namespace EduArchive_BE.Data
 
         }
         public DbSet<User> users { get; set; }
+        public DbSet<Document> documents { get; set; }
     }
 }
