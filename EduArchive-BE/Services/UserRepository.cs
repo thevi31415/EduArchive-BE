@@ -13,5 +13,9 @@ namespace EduArchive_BE.Services
         public List<User> GetAllUser() {
             return _db.users.ToList();
         }
+        public User GetUserById(Guid id)
+        {
+            return _db.users.SingleOrDefault(u => u.Id == id);
+        }
     }
 }

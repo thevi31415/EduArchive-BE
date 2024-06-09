@@ -30,6 +30,22 @@ namespace EduArchive_BE.Controllers
 
 
         }
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(Guid id)
+        {
+            try
+            {
+                return Ok(
+                    new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetUserById(id) }
+                    );
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Lay User", Data = null });
+            }
+
+
+        }
 
     }
 }
