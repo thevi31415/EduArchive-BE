@@ -1,8 +1,14 @@
 ﻿using EduArchive_BE.Model;
 using EduArchive_BE.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace EduArchive_BE.Controllers
 {
@@ -11,11 +17,14 @@ namespace EduArchive_BE.Controllers
     public class UserController : ControllerBase
     {
         private readonly IUserRepository _userRepository;
-        public UserController(IUserRepository userRepository)
+        private readonly AppSetting _appSettings;
+        public UserController(IUserRepository userRepository, IOptionsMonitor<AppSetting> appSettingsMonitor)
         {
             _userRepository = userRepository;
+            _appSettings = appSettingsMonitor.CurrentValue;
         }
         [HttpGet]
+        [Authorize]
         public IActionResult GetAllUser()
         {
             try
@@ -55,7 +64,7 @@ namespace EduArchive_BE.Controllers
               User user= _userRepository.Login(email, password);
                 if (user != null)
                 {
-                    return Ok(new ResponseMessage { Status = true, Message = "Them user thanh cong", Data = user });
+                    return Ok(new ResponseMessage { Status = true, Message = "Them user thanh cong", Data = GenerateToken(user) });
 
                 }
                 else
@@ -72,7 +81,28 @@ namespace EduArchive_BE.Controllers
             }
 
         }
+        private string GenerateToken(User nguoidung)
+        {
+            var jwrTokenHandler = new JwtSecurityTokenHandler();
 
+            var secretKeyBytes = Encoding.UTF8.GetBytes(_appSettings.SecretKey);
+
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[]
+                {
+                    new Claim(ClaimTypes.Name, nguoidung.UserName),
+                    new Claim(ClaimTypes.Email, nguoidung.Email),
+                    new Claim("TokenId", Guid.NewGuid().ToString())
+                }),
+                Expires = DateTime.UtcNow.AddDays(1),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = jwrTokenHandler.CreateToken(tokenDescriptor);
+
+            return jwrTokenHandler.WriteToken(token);
+
+        }
         [HttpPost()]
         public IActionResult AddUser(User user)
         {
