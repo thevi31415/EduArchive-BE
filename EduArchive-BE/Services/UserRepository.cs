@@ -1,5 +1,6 @@
 ﻿using EduArchive_BE.Data;
 using EduArchive_BE.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduArchive_BE.Services
 {
@@ -40,6 +41,21 @@ namespace EduArchive_BE.Services
                     return false;
                 }
             
+        }
+        public User Login(string email, string password)
+        {
+            var user = _db.users.FirstOrDefault(u => u.Email == email);
+
+            if (user != null && user.Password == password)
+            {
+                // Đăng nhập thành công
+                return user;
+            }
+            else
+            {
+                // Đăng nhập thất bại
+                return null;
+            }
         }
     }
 }

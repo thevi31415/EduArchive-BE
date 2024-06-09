@@ -2,6 +2,7 @@
 using EduArchive_BE.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace EduArchive_BE.Controllers
 {
@@ -46,6 +47,32 @@ namespace EduArchive_BE.Controllers
 
 
         }
+        [HttpGet("login")]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            try
+            {
+              User user= _userRepository.Login(email, password);
+                if (user != null)
+                {
+                    return Ok(new ResponseMessage { Status = true, Message = "Them user thanh cong", Data = user });
+
+                }
+                else
+                {
+
+                    return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Dang Nhap", Data = null });
+
+                }
+
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Them User", Data = null });
+            }
+
+        }
+
         [HttpPost()]
         public IActionResult AddUser(User user)
         {
