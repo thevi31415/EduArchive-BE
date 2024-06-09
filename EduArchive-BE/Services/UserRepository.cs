@@ -17,5 +17,29 @@ namespace EduArchive_BE.Services
         {
             return _db.users.SingleOrDefault(u => u.Id == id);
         }
+        public bool AddUser(User user)
+        {
+           
+                if (user == null)
+                {
+                    throw new ArgumentNullException(nameof(user));
+                }
+
+                try
+                {
+                     user.Id = Guid.NewGuid();
+                     user.CreatedDate = DateTime.Now;
+                user.Staus = 1;
+                    _db.users.Add(user);
+                    _db.SaveChanges();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    // Log exception (ex) if necessary
+                    return false;
+                }
+            
+        }
     }
 }

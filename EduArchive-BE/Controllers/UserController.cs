@@ -46,6 +46,23 @@ namespace EduArchive_BE.Controllers
 
 
         }
+        [HttpPost()]
+        public IActionResult AddUser(User user)
+        {
+            try
+            {
+                _userRepository.AddUser(user);
+                return Ok(
+                    new ResponseMessage { Status = true, Message = "Them user thanh cong", Data = user }
+                    );
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Them User", Data = null });
+            }
+
+
+        }
 
     }
 }

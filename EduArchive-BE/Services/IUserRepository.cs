@@ -7,5 +7,6 @@ namespace EduArchive_BE.Services
     {
         List<User> GetAllUser();
         User GetUserById(Guid id);
+        bool AddUser(User user);
     }
 }
