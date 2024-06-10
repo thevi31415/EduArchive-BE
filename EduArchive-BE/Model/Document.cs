@@ -12,11 +12,13 @@ namespace EduArchive_BE.Model
         public string Title { get; set; }
 
         public string Description { get; set; }
+        public string TypeDocument { get; set; }
 
         public string NameAuthor { get; set; }
 
         public Guid IdAuthor { get; set; }
 
+        public string userAuthor { get; set; }  
         public string? Image { get; set; }
 
         public string LinkDownload {  get; set; }

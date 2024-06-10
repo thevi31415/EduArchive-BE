@@ -30,21 +30,43 @@ namespace EduArchive_BE.Controllers
 
 
         }
-        [HttpGet("{id}")]
+
+        [HttpGet("ById/{id}")]
         public IActionResult GetDocumentById(Guid id)
         {
             try
             {
-                return Ok(
-                    new ResponseMessage { Status = true, Message = "Lay tat ca document thanh cong", Data = _documentRepository.GetDocumentById(id) }
-                    );
+                var document = _documentRepository.GetDocumentById(id);
+                if (document == null)
+                {
+                    return NotFound(new ResponseMessage { Status = false, Message = "Document not found", Data = null });
+                }
+
+                return Ok(new ResponseMessage { Status = true, Message = "Retrieve document successfully", Data = document });
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Lay User", Data = null });
+                return BadRequest(new ResponseMessage { Status = false, Message = "Failed to retrieve document", Data = null });
             }
+        }
 
+        [HttpGet("ByType/{type}")]
+        public IActionResult GetDocumentByType(string type)
+        {
+            try
+            {
+                var documents = _documentRepository.GetDocumentByType(type);
+                if (documents == null )
+                {
+                    return NotFound(new ResponseMessage { Status = false, Message = "No documents found for the given type", Data = null });
+                }
 
+                return Ok(new ResponseMessage { Status = true, Message = "Retrieve documents successfully", Data = documents });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Failed to retrieve documents", Data = null });
+            }
         }
         [HttpPost()]
         public IActionResult AddDocument(Document document)

@@ -77,10 +77,18 @@ namespace EduArchive_BE.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("TypeDocument")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int?>("View")
                         .HasColumnType("int");
 
                     b.Property<string>("YearSchool")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("userAuthor")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -124,6 +132,10 @@ namespace EduArchive_BE.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

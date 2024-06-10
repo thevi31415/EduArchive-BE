@@ -15,7 +15,7 @@ namespace EduArchive_BE.Model
         public string? Introduction { get; set; }    
 
         public string? Armorial {  get; set; }
-
+        public string Role { get; set; }
         public string? Avartar { get; set; }
         public string Password { get; set; }
         public string? Organization { get; set; }

@@ -14,9 +14,9 @@ namespace EduArchive_BE.Services
         public List<User> GetAllUser() {
             return _db.users.ToList();
         }
-        public User GetUserById(Guid id)
+        public User GetUserByUserName(string userName)
         {
-            return _db.users.SingleOrDefault(u => u.Id == id);
+            return _db.users.SingleOrDefault(u => u.UserName == userName);
         }
         public bool AddUser(User user)
         {

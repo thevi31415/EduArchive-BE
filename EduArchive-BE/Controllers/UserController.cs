@@ -40,13 +40,13 @@ namespace EduArchive_BE.Controllers
 
 
         }
-        [HttpGet("{id}")]
-        public IActionResult GetUserById(Guid id)
+        [HttpGet("{userName}")]
+        public IActionResult GetUserByUserName(string userName)
         {
             try
             {
                 return Ok(
-                    new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetUserById(id) }
+                    new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetUserByUserName(userName) }
                     );
             }
             catch
@@ -64,7 +64,13 @@ namespace EduArchive_BE.Controllers
               User user= _userRepository.Login(email, password);
                 if (user != null)
                 {
-                    return Ok(new ResponseMessage { Status = true, Message = "Them user thanh cong", Data = GenerateToken(user) });
+                    return Ok(new ResponseMessage { Status = true, Message = "Them user thanh cong",
+                        Data = new
+                        {
+                            user = user, // Không cần khai báo kiểu ở đây
+                            token = GenerateToken(user) // Không cần khai báo kiểu ở đây
+                        }
+                    }); 
 
                 }
                 else

@@ -19,6 +19,10 @@ namespace EduArchive_BE.Services
         {
             return _db.documents.SingleOrDefault(u => u.Id == id);
         }
+        public List<Document> GetDocumentByType(string TypeDocument)
+        {
+            return _db.documents.Where(u => u.TypeDocument == TypeDocument).ToList();
+        }
         public bool AddDocument(Document document)
         {
 

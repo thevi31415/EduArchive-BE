@@ -6,7 +6,7 @@ namespace EduArchive_BE.Services
     public interface IUserRepository
     {
         List<User> GetAllUser();
-        User GetUserById(Guid id);
+        User GetUserByUserName(string userName);
         bool AddUser(User user);
         User Login(string email, string password);
     }
