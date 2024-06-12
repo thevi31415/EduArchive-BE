@@ -15,5 +15,33 @@ namespace EduArchive_BE.Services
 
             return _db.subjects.ToList();
         }
+        public bool AddSubject(Subject subject)
+        {
+
+            if (subject == null)
+            {
+                throw new ArgumentNullException(nameof(subject));
+            }
+
+            try
+            {
+                subject.id = Guid.NewGuid();
+              
+                subject.Status = 1;
+                _db.subjects.Add(subject);
+                _db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Log exception (ex) if necessary
+                return false;
+            }
+
+        }
+        public Subject GetSubjectById(Guid id)
+        {
+            return _db.subjects.SingleOrDefault(u => u.id == id);
+        }
     }
 }
