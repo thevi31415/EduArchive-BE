@@ -22,7 +22,7 @@ namespace EduArchive_BE.Model
         public string? Image { get; set; }
 
         public string LinkDownload {  get; set; }
-
+        public string LinkView { get; set; }
         public int? View { get; set; }
 
         public int Status { get; set; }

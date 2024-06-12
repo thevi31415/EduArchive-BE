@@ -13,5 +13,8 @@ namespace EduArchive_BE.Data
         }
         public DbSet<User> users { get; set; }
         public DbSet<Document> documents { get; set; }
+
+        public DbSet<Subject> subjects { get; set; }
+ 
     }
 }
