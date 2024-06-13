@@ -87,6 +87,40 @@ namespace EduArchive_BE.Controllers
             }
 
         }
+        [HttpGet("logingoogle")]
+        public async Task<IActionResult> LoginGoogle(string idGoogle, string email, string userName, string Avatar)
+        {
+            try
+            {
+                User user = _userRepository.LoginGoogle(idGoogle, email, userName, Avatar);
+                if (user != null)
+                {
+                    return Ok(new ResponseMessage
+                    {
+                        Status = true,
+                        Message = "Login Google Thành công",
+                        Data = new
+                        {
+                            user = user, 
+                            token = GenerateToken(user) // Không cần khai báo kiểu ở đây
+                        }
+                    });
+
+                }
+                else
+                {
+
+                    return BadRequest(new ResponseMessage { Status = false, Message = "Khoog the Login Google", Data = null });
+
+                }
+
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Them User", Data = null });
+            }
+
+        }
         private string GenerateToken(User nguoidung)
         {
             var jwrTokenHandler = new JwtSecurityTokenHandler();

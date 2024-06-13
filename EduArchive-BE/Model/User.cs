@@ -6,14 +6,11 @@ namespace EduArchive_BE.Model
     {
         [Key]
         public Guid Id { get; set; }
+        public string IdGoogle { get; set; }    
         public string? Name { get; set; }
-
         public string UserName { get; set; }
-
         public string Email { get; set; }
-
         public string? Introduction { get; set; }    
-
         public string? Armorial {  get; set; }
         public string Role { get; set; }
         public string? Avartar { get; set; }

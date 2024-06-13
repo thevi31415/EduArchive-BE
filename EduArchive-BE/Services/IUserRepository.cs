@@ -9,5 +9,6 @@ namespace EduArchive_BE.Services
         User GetUserByUserName(string userName);
         bool AddUser(User user);
         User Login(string email, string password);
+        User LoginGoogle(string idGoogle, string email, string userName, string Avatar);
     }
 }
