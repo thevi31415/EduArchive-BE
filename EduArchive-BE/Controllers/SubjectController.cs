@@ -1,5 +1,6 @@
 ﻿using EduArchive_BE.Model;
 using EduArchive_BE.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -30,7 +31,24 @@ namespace EduArchive_BE.Controllers
 
 
         }
+        [HttpGet("GetRandomSubject")]
+        public IActionResult GetRandomSubject()
+        {
+            try
+            {
+                return Ok(
+                    new ResponseMessage { Status = true, Message = "Lay tat ca subject thanh cong", Data = _subjectRepository.GetRandomSubjects() }
+                    );
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Lay Subject", Data = null });
+            }
+
+
+        }
         [HttpPost()]
+        [Authorize]
         public IActionResult AddSubject(Subject subject)
         {
             try

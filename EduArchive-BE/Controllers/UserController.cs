@@ -24,7 +24,7 @@ namespace EduArchive_BE.Controllers
             _appSettings = appSettingsMonitor.CurrentValue;
         }
         [HttpGet]
-        [Authorize]
+   /*     [Authorize]*/
         public IActionResult GetAllUser()
         {
             try
@@ -47,6 +47,23 @@ namespace EduArchive_BE.Controllers
             {
                 return Ok(
                     new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetUserByUserName(userName) }
+                    );
+            }
+            catch
+            {
+                return BadRequest(new ResponseMessage { Status = false, Message = "Khong The Lay User", Data = null });
+            }
+
+
+        }
+        [HttpGet("{id}/{IdGoogle}")]
+        [Authorize]
+        public IActionResult GetUserById(Guid id, string IdGoogle)
+        {
+            try
+            {
+                return Ok(
+                    new ResponseMessage { Status = true, Message = "Lay tat ca user thanh cong", Data = _userRepository.GetUserById(id, IdGoogle) }
                     );
             }
             catch

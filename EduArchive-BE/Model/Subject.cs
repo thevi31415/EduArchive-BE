@@ -18,6 +18,9 @@ namespace EduArchive_BE.Model
         public  int? Status { get; set; }
        public int? View {  get; set; }
 
+        public string? Avartar { get; set; }
+
+        public string? BackGround { get; set; }
         public int? Like { get; set; }
 
     }

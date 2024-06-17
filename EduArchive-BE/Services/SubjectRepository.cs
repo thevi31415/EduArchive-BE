@@ -15,6 +15,11 @@ namespace EduArchive_BE.Services
 
             return _db.subjects.ToList();
         }
+        public List<Subject> GetRandomSubjects()
+        {
+            // Sử dụng phương thức LINQ để lấy về 5 subject ngẫu nhiên
+            return _db.subjects.OrderBy(s => Guid.NewGuid()).Take(5).ToList();
+        }
         public bool AddSubject(Subject subject)
         {
 

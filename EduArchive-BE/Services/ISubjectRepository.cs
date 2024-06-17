@@ -7,6 +7,6 @@ namespace EduArchive_BE.Services
         List<Subject> getAllSubject();
         bool AddSubject (Subject subject);
         Subject GetSubjectById(Guid id);
-
+        List<Subject> GetRandomSubjects();
     }
 }

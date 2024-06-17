@@ -21,6 +21,11 @@ namespace EduArchive_BE.Services
         {
             return _db.users.SingleOrDefault(u => u.UserName == userName);
         }
+        public User GetUserById(Guid id , string IdGoogle)
+        {
+            return _db.users.SingleOrDefault(u => u.Id == id && u.IdGoogle == IdGoogle);
+        }
+    
         public bool AddUser(User user)
         {
            
